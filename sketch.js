@@ -9,6 +9,7 @@ var stand1,stand2;
 var polygon;
 var slingShot;
 var polygon_img;
+var Score=0;
 function preload(){
   polygon_img=loadImage("polygon.png");
 }
@@ -65,6 +66,7 @@ function setup() {
 }
 function draw() {
   background(56,44,44); 
+  text("Score:"+Score,750,40);
  
   //Engine.update(engine);
   text(mouseX + ',' + mouseY, 10, 15);
@@ -115,6 +117,22 @@ function draw() {
   image(polygon_img ,polygon.position.x,polygon.position.y,40,40);
 
   slingShot.display();
+  block1.Score();
+  block2.Score();
+  block3.Score();
+  block4.Score();
+  block5.Score();
+  block6.Score();
+  block7.Score();
+  block8.Score();
+  block9.Score();
+  block10.Score();
+  block11.Score();
+  block12.Score();
+  block13.Score();
+  block14.Score();
+  block15.Score();
+
   
 }
 function mouseDragged(){
@@ -127,4 +145,5 @@ function keyPressed(){
   if(keyCode === 32){
       slingShot.attach(this.polygon);
   }
+  
 }
