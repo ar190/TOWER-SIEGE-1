@@ -8,10 +8,13 @@ var holder,polygon,ground;
 var stand1,stand2;
 var polygon;
 var slingShot;
-var polygon_img;
-var Score=0;
+var polygon_img, backgroundImg;
+var score=0;
+var bg = "images/light.jpg";
 function preload(){
-  polygon_img=loadImage("polygon.png");
+  getBackgroundImage();
+  polygon_img=loadImage("images/polygon.png");
+  
 }
 function setup() {
   createCanvas(900,400);
@@ -24,6 +27,7 @@ function setup() {
  
   //level one
   block1 = new Block(300,275,30,40);
+  console.log(block1);
   block2 = new Block(330,275,30,40);
   block3 = new Block(360,275,30,40);
   block4 = new Block(390,275,30,40);
@@ -65,14 +69,15 @@ function setup() {
 
 }
 function draw() {
-  background(56,44,44); 
-  text("Score:"+Score,750,40);
- 
+  //background(56,44,44); 
+  if(backgroundImg)
+    background(backgroundImg);
   //Engine.update(engine);
   text(mouseX + ',' + mouseY, 10, 15);
   textSize(20);
   fill("lightyellow");
   text("Drag the polygon to destroy the blocks",300,30);
+  text("SCORE : "+score,750,40);
   textSize(10);
   text("Press Space to get a second Chance to Play!!",650 ,350);
   ground.display();
@@ -117,23 +122,32 @@ function draw() {
   image(polygon_img ,polygon.position.x,polygon.position.y,40,40);
 
   slingShot.display();
-  block1.Score();
-  block2.Score();
-  block3.Score();
-  block4.Score();
-  block5.Score();
-  block6.Score();
-  block7.Score();
-  block8.Score();
-  block9.Score();
-  block10.Score();
-  block11.Score();
-  block12.Score();
-  block13.Score();
-  block14.Score();
-  block15.Score();
+  block1.score();
+  block2.score();
+  block3.score();
+  block4.score();
+  block5.score();
+  block6.score();
+  block7.score();
+  block8.score();
+  block9.score();
+  block10.score();
+  block11.score();
+  block12.score();
+  block13.score();
+  block14.score();
+  block15.score();
+  block16.score();
 
-  
+  blocks1.score();
+  blocks2.score();
+  blocks3.score();
+  blocks4.score();
+  blocks5.score();
+  blocks6.score();
+  blocks7.score();
+  blocks8.score();
+  blocks9.score();
 }
 function mouseDragged(){
   Matter.Body.setPosition(this.polygon,{x:mouseX,y:mouseY});
@@ -145,5 +159,21 @@ function keyPressed(){
   if(keyCode === 32){
       slingShot.attach(this.polygon);
   }
-  
+}
+async function getBackgroundImage(){
+   var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+   var responseJSON = await response.json();
+
+   var datetime = responseJSON.datetime;
+   var hour = datetime.slice(11, 13);
+   //console.log(hour);
+
+   if (hour >= 06 && hour <= 18) {
+     bg = "images/light.jpg";
+   } else {
+     bg = "images/dark.jpg";
+   }
+
+   backgroundImg = loadImage(bg);
+   console.log(backgroundImg);
 }
